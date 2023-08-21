@@ -1,0 +1,89 @@
+The assignment is based on an API, wherein you will have to use the data provided in the API and write a program to get the Weather report, wind speed and pressure from the user and get the result based on the API.
+
+  import java.io.HttpURLconnection;
+  import java.util.Scanner;
+  import java.io.IOException;
+  import java.io.InputStreamReader;
+  import java.net.URL;
+  import java.io.BufferReader;
+   public class weateherreportdemo 
+{
+   private Static final string API_URL = "https://samples.openweathermap.org/data/2.5/forecast/hourly?q=London,us&appid=b6907d289e10d714a6e88b30761fae22";
+
+public static void main(string_args){
+     Scanner sc=new Scanner(system.in);
+       int choice ;
+
+   do {
+   System.out.println("1.Get temparature");
+   System.out.println("2.get wind speed");
+    System.out.println("3.Get pressure");
+     System.out.println("0.exit");
+  choice=scannernextInt();
+   scanner.nextLine();
+
+    switch(choice) {
+     case 1: 
+          getWeatherDataandPrint("temperature")
+          break;
+     case 2: 
+          getWeatherDataandPrint("wind speed")
+          break;
+        case 3: 
+          getWeatherDataandPrint("pressure")
+          break;
+      case 0: 
+          getWeatherDataandPrint("exit the program")
+          break;   
+    default: 
+       System.out.println("incvalid choice.please try again");
+     }
+}
+    while(choice !=0);
+
+}
+        private static void getWeatherDataAndPrint(string field) {
+          
+        Scanner sc =new scanner (system.in);
+        system.out.print(""enter the date with time (yyyy-mm-dd ): ");
+      string inputdate =scanner.nextLine();
+        
+        try {
+               url url =new Url(API_URL);
+             httpURLConnection connection =(HttpURLConnection) url open.connection();
+            connection.setRequestmethod("get");
+              int responsecode =connection.getResponsecode();
+
+             if (responsecode == HttpURLConnection.HTTP_ok){
+           Bufferreader reader= new Buffereader (new InputStreamReader(connection.getInputStream()));
+         string line;
+           stringbuilder response = new stringbuilder();
+
+   while (line =reader.readerline())  ! =null ){
+    resposne.append(line);
+     } 
+       reader.close();
+     
+          system.out.println("valiue of " + field + at + inputdate+ ": " +value);
+              } else{
+               system.out.println("error:unable to fetch data from API");
+                 }
+                }  catch (IoException e ){
+                         system.out.println("error occured : + e.getMessage());
+       } 
+      }
+         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
